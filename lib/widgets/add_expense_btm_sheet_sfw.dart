@@ -1,4 +1,5 @@
 // import flutter pkgs here
+import 'package:expense_tracker/widgets/usr_input_criteria_dailog_slw.dart';
 import 'package:flutter/material.dart';
 // import project pkgs here
 import 'package:expense_tracker/models/expense_model.dart';
@@ -50,7 +51,47 @@ class _AddExpenseBtmSheetState extends State<AddExpenseBtmSheetSFW> {
     }
   }
 
-  void _saveNewExpenseAdded() {
+  void _saveNewExpenseAdded() async {
+    if (_titleController.text.length < 3) {
+      await showDialog(
+        context: context,
+        builder: (ctx) {
+          return UsrInputCriteriaDailog(
+            ctx: ctx,
+            title: 'Title criteria',
+            content: 'It cannot be less than 3 characters.',
+          );
+        },
+      );
+      return;
+    }
+    if (!isDatePicked) {
+      await showDialog(
+        context: context,
+        builder: (ctx) {
+          return UsrInputCriteriaDailog(
+            ctx: ctx,
+            title: 'Date criteria',
+            content: 'Please select a date.',
+          );
+        },
+      );
+      return;
+    }
+    if (double.tryParse(_amountController.text) == null ||
+        double.parse(_amountController.text) == 0.0) {
+      await showDialog(
+        context: context,
+        builder: (ctx) {
+          return UsrInputCriteriaDailog(
+            ctx: ctx,
+            title: 'Amount criteria',
+            content: 'Please enter a valid amount.',
+          );
+        },
+      );
+      return;
+    }
     ExpenseModel newExpense = ExpenseModel(
       title: _titleController.text,
       amount: double.parse(_amountController.text),
