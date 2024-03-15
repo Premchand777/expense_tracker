@@ -10,10 +10,10 @@ import 'package:expense_tracker/widgets/usr_input_field_slw.dart';
 class AddExpenseBtmSheetSFW extends StatefulWidget {
   const AddExpenseBtmSheetSFW({
     super.key,
-    required this.onNewExpenseAdd,
+    required this.saveNewExpense,
   });
 
-  final void Function(ExpenseModel newExpense) onNewExpenseAdd;
+  final void Function(ExpenseModel newExpense) saveNewExpense;
 
   @override
   State<AddExpenseBtmSheetSFW> createState() => _AddExpenseBtmSheetState();
@@ -101,7 +101,7 @@ class _AddExpenseBtmSheetState extends State<AddExpenseBtmSheetSFW> {
       date: pickedDate,
     );
     Navigator.pop(context);
-    widget.onNewExpenseAdd(newExpense);
+    widget.saveNewExpense(newExpense);
   }
 
   @override
