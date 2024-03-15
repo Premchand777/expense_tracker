@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:expense_tracker/models/expense_model.dart';
 import 'package:expense_tracker/styles/common_styles.dart';
 import 'package:expense_tracker/widgets/save_cancel_btn_slw.dart';
+import 'package:expense_tracker/widgets/usr_input_field_slw.dart';
 
 class AddExpenseBtmSheetSFW extends StatefulWidget {
   const AddExpenseBtmSheetSFW({
@@ -132,21 +133,12 @@ class _AddExpenseBtmSheetState extends State<AddExpenseBtmSheetSFW> {
             left: 24.0,
             right: 24.0,
           ),
-          child: TextField(
-            decoration: const InputDecoration(
-              border: UnderlineInputBorder(),
-              labelText: 'Title',
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.blue),
-              ),
-              labelStyle: TextStyle(
-                color: Colors.blue,
-              ),
-            ),
-            cursorColor: Colors.blue,
+          child: UsrInputField(
             controller: _titleController,
+            labelText: 'Title',
             keyboardType: TextInputType.name,
             maxLength: 50,
+            prefix: const Text(''),
           ),
         ),
         Padding(
@@ -158,29 +150,19 @@ class _AddExpenseBtmSheetState extends State<AddExpenseBtmSheetSFW> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Expanded(
-                child: TextField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Amount',
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                    ),
-                    labelStyle: TextStyle(
-                      color: Colors.blue,
-                    ),
-                    prefix: Padding(
-                      padding: EdgeInsets.only(
-                        right: 4,
-                      ),
-                      child: Text('₹'),
-                    ),
-                  ),
-                  cursorColor: Colors.blue,
+                child: UsrInputField(
                   controller: _amountController,
+                  labelText: 'Amount',
                   keyboardType: const TextInputType.numberWithOptions(
                     decimal: true,
                   ),
                   maxLength: 20,
+                  prefix: const Padding(
+                    padding: EdgeInsets.only(
+                      right: 4,
+                    ),
+                    child: Text('₹'),
+                  ),
                 ),
               ),
               const SizedBox(
