@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 // import project pkgs here
 import 'package:expense_tracker/models/expense_model.dart';
 
-
 class ExpensesListSLW extends StatelessWidget {
   const ExpensesListSLW({
     super.key,
@@ -41,11 +40,14 @@ class ExpensesListSLW extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    const Icon(
-                      Icons.calendar_month_rounded,
-                    ),
                     Text(
                       expenses[index].formattedDate,
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    const Icon(
+                      Icons.calendar_month_rounded,
                     ),
                   ],
                 ),
