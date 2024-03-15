@@ -42,6 +42,41 @@ class _AddExpenseBtmSheetState extends State<AddExpenseBtmSheetSFW> {
       initialDate: DateTime.now(),
       firstDate: DateTime(2015),
       lastDate: DateTime(2025),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData().copyWith(
+            datePickerTheme: const DatePickerThemeData().copyWith(
+              backgroundColor: Colors.white,
+              todayBackgroundColor: const MaterialStatePropertyAll(
+                Colors.blue,
+              ),
+              cancelButtonStyle: const ButtonStyle(
+                foregroundColor: MaterialStatePropertyAll(
+                  Colors.blue,
+                ),
+                overlayColor: MaterialStatePropertyAll(
+                  Color.fromRGBO(144, 202, 249, 1),
+                ),
+              ),
+              confirmButtonStyle: const ButtonStyle(
+                foregroundColor: MaterialStatePropertyAll(
+                  Colors.blue,
+                ),
+                overlayColor: MaterialStatePropertyAll(
+                  Color.fromRGBO(144, 202, 249, 1),
+                ),
+              ),
+              headerBackgroundColor: Colors.blue,
+              headerForegroundColor: Colors.white,
+              todayBorder: const BorderSide(
+                width: 0,
+                color: Colors.transparent,
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
     if (selectedDate != null) {
       setState(() {

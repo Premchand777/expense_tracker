@@ -38,18 +38,25 @@ class ExpensesListSLW extends StatelessWidget {
             }
           },
           child: Card(
+            elevation: 3,
+            shadowColor: Colors.blueGrey,
+            surfaceTintColor: const Color.fromARGB(255, 97, 174, 236),
             child: Column(
               children: [
                 ListTile(
-                  title: Text(expenses[index].title),
+                  title: Text(
+                    expenses[index].title,
+                    textAlign: TextAlign.right,
+                  ),
                   leading: Icon(expenses[index].expenseCategoryIcon),
+                  horizontalTitleGap: 100,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                    top: 18,
+                    top: 20,
                     left: 18,
-                    right: 16,
-                    bottom: 12,
+                    right: 18,
+                    bottom: 20,
                   ),
                   child: Row(
                     children: [
@@ -57,6 +64,8 @@ class ExpensesListSLW extends StatelessWidget {
                         '₹ ${expenses[index].amount.toStringAsFixed(2)}',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                          fontSize: 16,
                         ),
                       ),
                       const Spacer(),
