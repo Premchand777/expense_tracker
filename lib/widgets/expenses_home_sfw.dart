@@ -7,6 +7,7 @@ import 'package:expense_tracker/widgets/add_expense_btn_slw.dart';
 import 'package:expense_tracker/widgets/add_expense_btm_sheet_sfw.dart';
 import 'package:expense_tracker/data/expenses_data.dart';
 import 'package:expense_tracker/models/expense_model.dart';
+import 'package:expense_tracker/widgets/app_reusable_widgets.dart';
 
 class ExpensesHomeScreenSFW extends StatefulWidget {
   const ExpensesHomeScreenSFW({
@@ -22,20 +23,44 @@ class ExpensesHomeScreenSFWState extends State<ExpensesHomeScreenSFW> {
 
   void _openNewExpenseSaveBottomSheet() {
     showModalBottomSheet(
-      // // backgroundColor: Colors.blue,
-      // enableDrag: true,
-      // useSafeArea: true,
+      showDragHandle: true,
+      useSafeArea: true,
+      isScrollControlled: true,
       context: context,
       builder: (ctx) {
-        return AddExpenseBtmSheetSFW(onNewExpenseAdd: renderNewExpense);
+        return AddExpenseBtmSheetSFW(saveNewExpense: _saveNewExpense);
       },
     );
   }
 
-  void renderNewExpense(ExpenseModel newExpense) {
+  void _saveNewExpense(ExpenseModel newExpense) {
     setState(() {
       expensesList.add(newExpense);
     });
+    showSnackBarMessage(
+      context,
+      'New expense added successfully.',
+      null,
+      null,
+      null,
+    );
+  }
+
+  void _deleteNewExpense(int index, ExpenseModel toDeleteExpense) {
+    setState(() {
+      expensesList.removeAt(index);
+    });
+    showSnackBarMessage(
+      context,
+      'Expense deleted successfully.',
+      const Duration(seconds: 3),
+      'Undo',
+      () {
+        setState(() {
+          expensesList.insert(index, toDeleteExpense);
+        });
+      },
+    );
   }
 
   @override
@@ -55,11 +80,11 @@ class ExpensesHomeScreenSFWState extends State<ExpensesHomeScreenSFW> {
         backgroundColor: Colors.blue,
         shadowColor: Colors.blueGrey,
         centerTitle: false,
-        titleSpacing: 8,
+        titleSpacing: 16,
         elevation: 1.25,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 8),
+            padding: const EdgeInsets.only(right: 12),
             child: AddExpenseBtnSLW(
               onClick: _openNewExpenseSaveBottomSheet,
             ),
@@ -81,6 +106,7 @@ class ExpensesHomeScreenSFWState extends State<ExpensesHomeScreenSFW> {
               )
             : ExpensesListSLW(
                 expenses: expensesList,
+                deleteNewExpense: _deleteNewExpense,
               ),
       ),
     );
