@@ -6,10 +6,9 @@ import 'package:expense_tracker/widgets/expenses_home_sfw.dart';
 
 void main() {
   runApp(
-    SafeArea(
+    const SafeArea(
       child: MaterialApp(
-        theme: ThemeData(useMaterial3: true),
-        home: const ExpensesHomeScreenSFW(),
+        home: ExpensesHomeScreenSFW(),
         debugShowCheckedModeBanner: false,
       ),
     ),
